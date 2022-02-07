@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.googlebooks.R
 import com.example.googlebooks.databinding.BookDisplayFragmentLayoutBinding
 import com.example.googlebooks.model.presentation.BookResponse
 import com.example.googlebooks.model.presentation.VolumeItem
-import com.example.networktest.view.BookAdapter
+import com.example.googlebooks.adapter.BookAdapter
 
 class BookListFragment : Fragment() {
 
@@ -57,7 +58,8 @@ class BookListFragment : Fragment() {
     }
     private fun FragmentActivity.openDisplayFragment(book: VolumeItem){
         supportFragmentManager.beginTransaction()
-            .replace(android.R.id.content,DetailFragment.newInstance(book))
+            .replace(R.id.container_display,DetailFragment.newInstance(book))
+            .addToBackStack(DetailFragment.javaClass.name)
             .commit()
     }
 }

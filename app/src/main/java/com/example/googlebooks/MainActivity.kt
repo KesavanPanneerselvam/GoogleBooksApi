@@ -19,27 +19,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(isDeviceConnected())
-            supportFragmentManager.beginTransaction().replace(R.id.container_search,
-        SearchBookFragment()).commit()
+        if (isDeviceConnected())
+            supportFragmentManager.beginTransaction().replace(
+                R.id.container_search,
+                SearchBookFragment()
+            ).commit()
         else
             showError()
 
     }
 
-    fun executeRetrofit(bookTitle:String,bookType:String,maxResult:Int){
+    fun executeRetrofit(bookTitle: String, bookType: String, maxResult: Int) {
 
-        Api.initRetrofit().getBookByTitle(bookTitle,bookType,maxResult)
-            .enqueue(object : Callback<BookResponse>{
+        Api.initRetrofit().getBookByTitle(bookTitle, bookType, maxResult)
+            .enqueue(object : Callback<BookResponse> {
                 override fun onResponse(
                     call: Call<BookResponse>,
                     response: Response<BookResponse>
                 ) {
-                    if(response.isSuccessful){
+                    if (response.isSuccessful) {
                         inflateDisplayFragment(response.body())
-                    }else
+                    } else
                         showError()
                 }
+
                 override fun onFailure(call: Call<BookResponse>, t: Throwable) {
 
                 }
@@ -47,19 +50,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showError() {
-        Snackbar.make(findViewById(R.id.container_display),
+        Snackbar.make(
+            findViewById(R.id.container_display),
             "No network, retry?", Snackbar.LENGTH_INDEFINITE
         ).setAction("Retry") {
             Log.d(TAG, "showError: Retry")
         }.show()
     }
 
-    fun  inflateDisplayFragment(dataSet : BookResponse?)
-    {
+    fun inflateDisplayFragment(dataSet: BookResponse?) {
         dataSet?.let {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container_display,BookListFragment.newInstance(it))
+                .replace(R.id.container_display, BookListFragment.newInstance(it))
                 .commit()
         }
     }
-    }
+}

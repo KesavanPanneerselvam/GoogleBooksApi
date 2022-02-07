@@ -10,16 +10,15 @@ import retrofit2.http.Query
 interface Api {
 
     @GET("books/v1/volumes")
-
-        fun getBookByTitle(
-    @Query("q") bookTitle :String,
-    @Query("printType") bookType: String =  "books",
-    @Query("maxResults") max: Int = 5
-    ) : Call<BookResponse>
+    fun getBookByTitle(
+        @Query("q") bookTitle: String,
+        @Query("printType") bookType: String = "books",
+        @Query("maxResults") max: Int = 5
+    ): Call<BookResponse>
 
     //kind of static declaration
-    companion object{
-        fun initRetrofit():Api{
+    companion object {
+        fun initRetrofit(): Api {
             return Retrofit.Builder()
                 .baseUrl("https://www.googleapis.com/")
                 .addConverterFactory(GsonConverterFactory.create())

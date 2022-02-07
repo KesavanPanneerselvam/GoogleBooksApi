@@ -1,4 +1,4 @@
-package com.example.googlebooks.view
+package com.example.googlebooks.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.googlebooks.R

@@ -1,11 +1,10 @@
-package com.example.networktest.view
+package com.example.googlebooks.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.googlebooks.databinding.ItemLayoutBinding
 import com.example.googlebooks.model.presentation.VolumeItem
-import com.example.googlebooks.view.BookViewHolder
 
 
 class BookAdapter(private val dataSet: List<VolumeItem>,private val openDisplayFragment:(VolumeItem)->Unit )

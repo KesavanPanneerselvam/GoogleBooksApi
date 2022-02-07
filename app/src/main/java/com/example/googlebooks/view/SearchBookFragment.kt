@@ -1,5 +1,6 @@
 package com.example.googlebooks.view
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import com.example.googlebooks.MainActivity
 import com.example.googlebooks.R
 import com.example.googlebooks.databinding.BookSearchFragmentLayoutBinding
+import com.example.googlebooks.hideKeyboard
 
 class SearchBookFragment : Fragment() {
 
@@ -36,7 +38,7 @@ class SearchBookFragment : Fragment() {
                 )
         }
         binding.btnBookSearch.setOnClickListener {
-
+            it.hideKeyboard()
             requireActivity().doSearchBook(
                 binding.tilBookSearch.editText?.text.toString(),
                 binding.bookType.selectedItem.toString(),
@@ -44,6 +46,8 @@ class SearchBookFragment : Fragment() {
             )
         }
     }
+
+
     fun FragmentActivity?.doSearchBook(bookTitle:String, bookType: String, maxResult: Int){
         if(requireActivity() is MainActivity)
             (requireActivity() as MainActivity).executeRetrofit(bookTitle,bookType,maxResult)
